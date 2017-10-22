@@ -4,7 +4,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D, Merge, Lambda, Cropping2D
 from keras.utils import np_utils
-#from keras.callbacks import ModelCheckpoint
+from keras.callbacks import ModelCheckpoint
 from training_data_loader import *
 
 model_file = 'model.h5'
@@ -15,8 +15,8 @@ model.add(Cropping2D(cropping=((50,20), (0,0))))
 model.add(Conv2D(24, (5, 5), activation='elu', subsample=(2,2)))
 model.add(Conv2D(36, (5, 5), activation='elu', subsample=(2,2)))
 model.add(Conv2D(48, (5, 5), activation='elu', subsample=(2,2)))
-model.add(Conv2D(64, (5, 5), activation='elu'))
-#model.add(Conv2D(64, (5, 5), activation='elu'))
+model.add(Conv2D(64, (3, 3), activation='elu'))
+model.add(Conv2D(64, (3, 3), activation='elu'))
 model.add(Dropout(0.5))
 model.add(Flatten())
 model.add(Dense(100, activation='elu'))

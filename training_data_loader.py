@@ -22,11 +22,21 @@ def load_data():
     img = mpimg.imread(center_img_file_name)
     X.append(img)
     y.append(steering)
+    X.append(np.fliplr(img)) # flip the image for extra training data 
+    y.append(-steering)
 
-    # flip the image for extra training data
-    img_flipped = np.fliplr(img)
-    steering_flipped = -steering
-    X.append(img_flipped)
-    y.append(steering_flipped)
+    img = mpimg.imread(left_img_file_name)
+    left_steering = steering + 0.4
+    X.append(img)
+    y.append(left_steering)
+    X.append(np.fliplr(img)) # flip the image for extra training data 
+    y.append(-left_steering)
+    
+    img = mpimg.imread(right_img_file_name)
+    right_steering = steering - 0.4
+    X.append(img)
+    y.append(right_steering)
+    X.append(np.fliplr(img)) # flip the image for extra training data 
+    y.append(-right_steering)
 
   return np.array(X), np.array(y)
