@@ -4,7 +4,7 @@ import matplotlib.image as mpimg
 import numpy as np
 
 driving_log_file = 'data/driving_log.csv'
-image_fold = 'data/IMG'
+image_fold = 'data/IMG/'
 
 def load_data():
   reader = csv.reader(open(driving_log_file))

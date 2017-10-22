@@ -6,7 +6,7 @@ from keras.layers import Conv2D, MaxPooling2D, Merge
 from keras.utils import np_utils
 from training_data_loader import *
 
-model_file = 'model.h'
+model_file = 'model.h5'
 
 # left_branch = Sequential()
 # left_branch.add(Conv2D(32, (3, 3), activation='relu', input_shape=(160, 320, 3)))
