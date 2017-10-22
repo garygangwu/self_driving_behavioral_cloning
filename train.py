@@ -25,11 +25,15 @@ model.add(Dense(10, activation='elu'))
 model.add(Dense(1))
 model.summary()
 
-#checkpoint = ModelCheckpoint('model-{epoch:03d}.h5', monitor='val_loss', verbose=0, save_best_only=True, mode='auto')
+checkpoint = ModelCheckpoint('model-{epoch:03d}.h5', monitor='val_loss', verbose=0, save_best_only=True, mode='auto')
 model.compile(loss='mean_squared_error', optimizer='adam')
 
 X_train, y_train = load_data()
-model.fit(X_train, y_train, epochs=10, batch_size=32, validation_split=0.2)
+
+model.fit(X_train, y_train,
+          epochs=10, batch_size=128, validation_split=0.2, shuffle=True,
+          callbacks=[checkpoint])
+
 model.save(model_file)
 
 l = model.predict(X_train, batch_size=100)
