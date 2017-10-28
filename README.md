@@ -4,9 +4,19 @@ The goal of this project is to train a convolutional neural network to map the f
 
 Here are two youtube videos that the self cars ran under two anmiated roads from the simulation tool
 
-[Road Track one - Youtube](https://youtu.be/L6MeuvmfgOM)
+| <a href="http://www.youtube.com/watch?feature=player_embedded&v=L6MeuvmfgOM" target="_blank"><img src="http://img.youtube.com/vi/L6MeuvmfgOM/0.jpg" alt="Road Track One" width="240" height="180" border="10" /></a> | <a href="http://www.youtube.com/watch?feature=player_embedded&v=MueOlce4iXw" target="_blank"><img src="http://img.youtube.com/vi/MueOlce4iXw/0.jpg" alt="Road Track One" width="240" height="180" border="10" /></a> |
+|---|---|
+|[Road Track one - Youtube](https://youtu.be/L6MeuvmfgOM)|[Road Track two (hard one) - Youtube](https://youtu.be/MueOlce4iXw) |
 
-[Road Track two (hard one) - Youtube](https://youtu.be/MueOlce4iXw)
+
+
+
+
+
+
+
+
+
 
 ## Files and Usage
 
