@@ -31,7 +31,7 @@ From bottom up, below is each layer's funcationalities
 
 | Layer | Type | Description |
 | :---: | :---: | --- |
-| Input |  | 1) 160x320 images <br> 2) Normalize the pixel value to [-1, 1] range <br> 3) Chop the top and bottom portion of the images for removing noices |
+| Input |  | 1) 160x320 images <br> 2) Normalize the pixel value to [-1, 1] range <br> 3) Chop the top and bottom portion of the images to remove noices |
 | Layer 1 | Conv2D | 24 filters with 5x5 convolution window and 2x2 strides |
 | Layer 2 | Conv2D | 36 filters with 5x5 convolution window and 2x2 strides |
 | Layer 3 | Conv2D | 48 filters with 5x5 convolution window and 2x2 strides |
@@ -48,11 +48,17 @@ The left deep neural network architecure used from [NVidia’s paper](https://ar
 
 ## Training Details
 
+### Leverage left and right camera images
+
+The center image represents the direction that the car go straight, and the left / right images records the direction if the car steer left or right on a certain angle. Since the distance and angle are not given for the left and right camera, empiricially I added an offset of 0.25 to the left images and subtracted 0.25 from the right images. This is intend to adjust car back to the view of the center camera, if the center camera faces what the left / right cameras see.
+
 ### Data Augmentation
 
 ### Prevent overfitting
 
 ### Extra road training
+
+### Additional training data collection for the tough driving parts
 
 ## Evaluation
 
