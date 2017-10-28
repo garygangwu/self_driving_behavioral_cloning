@@ -15,6 +15,11 @@ Here are two youtube videos that the self cars ran under two anmiated roads from
 ## Data Collection
 The train data is collected by driving the car in the simulator in two loops
 
+
+<img src="images/left_1.jpg" width="200"><img src="images/center_1.jpg" width="200"><img src="images/right_1.jpg" width="200">
+
+<img src="images/left_2.jpg" width="200"><img src="images/center_2.jpg" width="200"><img src="images/right_2.jpg" width="200">
+
 ## Network Architecture
 I used Nvidia's architecture from their white paper [End to End Learning for Self-Driving Cars](https://arxiv.org/pdf/1604.07316.pdf). It contains 9 layers, 1 normalization layer, 5 convolutional layers, and 3 fully connected layers. 
 
