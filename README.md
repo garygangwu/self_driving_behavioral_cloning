@@ -31,12 +31,12 @@ From bottom up, below is each layer's funcationalities
 
 | Layer | Type | Description |
 | :---: | :---: | --- |
-| Input |  | 1) 160 X 320 images <br> 2) Normalize the pixel value to [-1, 1] range <br> 3) Chop the top and bottom portion of the images for removing noices |
-| Layer 1 | Conv2D | 24 filters with 5x5 convolution window and 2X2 strides |
-| Layer 2 | Conv2D | 36 filters with 5x5 convolution window and 2X2 strides |
-| Layer 3 | Conv2D | 48 filters with 5x5 convolution window and 2X2 strides |
-| Layer 4 | Conv2D | 64 filters with 3x3 convolution window and 1X1 strides |
-| Layer 5 | Conv2D | 64 filters with 3x3 convolution window and 1X1 strides |
+| Input |  | 1) 160x320 images <br> 2) Normalize the pixel value to [-1, 1] range <br> 3) Chop the top and bottom portion of the images for removing noices |
+| Layer 1 | Conv2D | 24 filters with 5x5 convolution window and 2x2 strides |
+| Layer 2 | Conv2D | 36 filters with 5x5 convolution window and 2x2 strides |
+| Layer 3 | Conv2D | 48 filters with 5x5 convolution window and 2x2 strides |
+| Layer 4 | Conv2D | 64 filters with 3x3 convolution window and 1x1 strides |
+| Layer 5 | Conv2D | 64 filters with 3x3 convolution window and 1x1 strides |
 | Layer 6 | Fully connected | 1) 50% dropout <br> 2) Output 100 neurons |
 | Layer 7 | Fully connected | 1) 50% dropout <br> 2) Output 50 neurons |
 | Layer 8 | Fully connected | Output 10 neurons |
@@ -44,13 +44,11 @@ From bottom up, below is each layer's funcationalities
 
 <img src="images/nvidia_cnn.png" alt="Architecture"><img src="images/detail_cnn.png" alt="Architecture" width="360">
 
-The left deep neural network architecure used from [NVidia’s paper](https://arxiv.org/pdf/1604.07316.pdf)
- 
-
-
-## Data Augmentation and Preprocessing
+The left deep neural network architecure used from [NVidia’s paper](https://arxiv.org/pdf/1604.07316.pdf). The right is the screen shot from Keras model.summary() call.
 
 ## Training Details
+
+### Data Augmentation
 
 ### Prevent overfitting
 
