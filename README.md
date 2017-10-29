@@ -94,7 +94,7 @@ These roads seems to be close to each other on the images, but not connected. Ho
 
 ### Can the model trained on road A directly drive successfully on road B?
 
-If the road A and B's conditions are very similar, it is totally possible the model can be directly applied to the other road. Here is the youtube video demostrating that the model that I trained in the easy road was able to drive car in an unseen mountain road successfully.
+If the road A and B's conditions are similar, it is totally possible the model can be directly applied to the other road. Here is the youtube video demostrating that the model that I trained in the easy road was able to drive car in an unseen mountain road successfully. (This road were found in another version of Udacity's driving simulator)
 
 | <a href="http://www.youtube.com/watch?feature=player_embedded&v=Qb-Ik6BNcWE" target="_blank"><img src="http://img.youtube.com/vi/Qb-Ik6BNcWE/0.jpg" alt="Road Track One" width="240" height="180" border="10" /></a> |
 |---|
