@@ -48,13 +48,19 @@ The left deep neural network architecure used from [NVidia’s paper](https://ar
 
 ## Training Details
 
+For each road in the simulator, I driven the cars for two cycles to collect the images, steering, throttle, brake, and speed information. 
+
 ### Leverage left and right camera images
 
-The center image represents the direction that the car go straight, and the left / right images records the direction if the car steer left or right on a certain angle. Since the distance and angle are not given for the left and right camera, empiricially I added an offset of 0.25 to the left images and subtracted 0.25 from the right images. This is intend to adjust car back to the view of the center camera, if the center camera faces what the left / right cameras see.
+he left and right images are important to teach the network how to recover from a poor position. The center image represents the direction that the car go straight, and the left / right images records the direction if the car steer left or right on a certain angle. Since the distance and angle are not given for the left and right camera in the simulator, an empiricial approach is applied: adding an offset of 0.25 to the left images and substracting 0.25 from the right images. This is intend to steer the car back to the view of the center camera, if the center camera faces what the left / right cameras see.
 
-### Data Augmentation
+### Data Augmentation through fliping images
+
+Data augementation can be acheived through flipping images and taking the opposite sign of the steering measurement. This only only introduces more training data, but also minimizes the left turn bias because in the simulator the steering left dominates in the road condition
 
 ### Prevent overfitting
+
+To prevent overfitting, both dropout and L2 regulaization are used. 50% dropout has applied to the first two fully connected layers, while the L2 regulaization has appiled to conv2D and fully connected layers.
 
 ### Extra road training
 
