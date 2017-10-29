@@ -50,6 +50,17 @@ The left deep neural network architecure used from [NVidia’s paper](https://ar
 
 For each road in the simulator, I driven the cars for two cycles to collect the images, steering, throttle, brake, and speed information. 
 
+### Data preprocessing
+
+* Normalization: each pixel value is normalized to (-1, 1) range
+* Noise removal: Chop the image to excludes the sky and/or the hood of the car
+* Train / validation data set split: 80% assigned to train and 20% to validation after shuffling the data
+
+### Model hyperparameters
+
+* Optimized on mean squared error as a standard unbiased estimate of error variance for this regression problem
+* Adam optimizer is used, because it is [suggested as the default optimization method for deep learning applications](http://cs231n.github.io/neural-networks-3/)
+
 ### Leverage left and right camera images
 
 he left and right images are important to teach the network how to recover from a poor position. The center image represents the direction that the car go straight, and the left / right images records the direction if the car steer left or right on a certain angle. Since the distance and angle are not given for the left and right camera in the simulator, an empiricial approach is applied: adding an offset of 0.25 to the left images and substracting 0.25 from the right images. This is intend to steer the car back to the view of the center camera, if the center camera faces what the left / right cameras see.
@@ -57,6 +68,13 @@ he left and right images are important to teach the network how to recover from 
 ### Data Augmentation through fliping images
 
 Data augementation can be acheived through flipping images and taking the opposite sign of the steering measurement. This only only introduces more training data, but also minimizes the left turn bias because in the simulator the steering left dominates in the road condition
+
+### Training data size
+
+After the data augmentation, 
+
+* Each Road: 
+* Hard Road: 65250 images for training
 
 ### Prevent overfitting
 
