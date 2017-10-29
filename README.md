@@ -96,7 +96,7 @@ After the data augmentation,
 
 ### Prevent overfitting
 
-To prevent overfitting, both dropout and L2 regulaization are used. 50% dropout has applied to the first two fully connected layers, while the L2 regulaization has appiled to conv2D and fully connected layers.
+Nvidia paper didn't offer any details how to alleviate overfitting. In this project, both dropout and L2 regulaization are used empirically. 50% dropout has applied to the first two fully connected layers, while the L2 regulaization has appiled to conv2D and fully connected layers.
 
 ### Model checkpoint
 
