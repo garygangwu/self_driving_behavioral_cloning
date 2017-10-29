@@ -9,11 +9,23 @@ Here are two youtube videos that the self-driving cars ran under two anmiated ro
 |[Road Track one - Youtube](https://youtu.be/L6MeuvmfgOM)|[Road Track two (hard one) - Youtube](https://youtu.be/MueOlce4iXw) |
 
 ## Simulator Download
-Linux
-macOS
-Windows
+[Linux](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae46bb_linux-sim/linux-sim.zip)
+[macOS](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae4594_mac-sim.app/mac-sim.app.zip)
 
 ## Files and Usage
+1. model.py
+    * Load training data and training a model to predict steering angles.
+    * `python model.py` to train the model with the output `model.h5` as the model file.
+2. model.h5
+    * Keras deep learning model file for "the easy road"
+3. model.2.h5
+    * Keras deep learning model file for "the hard road"    
+4. drive.py
+    * A server to take images and output the steer predictions based on a trained model
+    * `python drive.py model.h5`
+5. video.py
+    * Generate an mp4 video from the previously saved images of an autonomous run.
+    * `python video.py previous_run1`
 
 # Implementation Deep Dive
 
@@ -77,7 +89,7 @@ Data augementation can be acheived through flipping images and taking the opposi
 
 After the data augmentation, 
 
-* Each Road: 
+* Each Road: 38988 images
 * Hard Road: 65250 images
 
 ### Prevent overfitting
