@@ -64,9 +64,10 @@ To prevent overfitting, both dropout and L2 regulaization are used. 50% dropout 
 
 ### Extra road training
 
-The first simulator road is quite smooth with few sharp turn and difficult images to train. However, the second simulator road
+The first simulator road is smooth with few sharp turn, and so I only need to drive the car for a couple cycle to complete the training. The result works pretty well. However, the second simulator road is a lot harder, not only with sharp turns, but also multiple roads in the same images and thus making the model confused on which one is the right path.
 
-Additional training data collection for the tough driving parts
+
+
 
 ## Evaluation
 
