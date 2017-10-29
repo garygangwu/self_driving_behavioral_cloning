@@ -74,7 +74,7 @@ Data augementation can be acheived through flipping images and taking the opposi
 After the data augmentation, 
 
 * Each Road: 
-* Hard Road: 65250 images for training
+* Hard Road: 65250 images
 
 ### Prevent overfitting
 
