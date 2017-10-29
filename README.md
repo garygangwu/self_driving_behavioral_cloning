@@ -26,6 +26,8 @@ Here are two youtube videos that the self-driving cars ran under two anmiated ro
 5. video.py
     * Generate an mp4 video from the previously saved images of an autonomous run.
     * `python video.py previous_run1`
+6. video.mp4
+    * A video recording of the vehicle driving autonomously in the first road
 
 # Implementation Deep Dive
 
@@ -95,6 +97,10 @@ After the data augmentation,
 ### Prevent overfitting
 
 To prevent overfitting, both dropout and L2 regulaization are used. 50% dropout has applied to the first two fully connected layers, while the L2 regulaization has appiled to conv2D and fully connected layers.
+
+### Model checkpoint
+
+Due to the result of over-training, the model from the last epoch is not necessary the best one. We should pick the latest best model according to the monitored quantity, which in our case is the lowest loss on the validation set. Therefore, `keras.callbacks.ModelCheckpoint` is used to evaluate and capture the best model after every training epoch.
 
 ### Extra road driving for better training.
 
