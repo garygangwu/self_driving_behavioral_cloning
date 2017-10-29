@@ -54,7 +54,9 @@ For each road in the simulator, I driven the cars for two cycles to collect the 
 
 * Normalization: each pixel value is normalized to (-1, 1) range
 * Noise removal: Chop the image to excludes the sky and/or the hood of the car
+
 <img src="images/left_1_chopped.png" width="200"><img src="images/center_1_chopped.png" width="200"><img src="images/right_1_chopped.png" width="200">
+
 * Train / validation data set split: 80% assigned to train and 20% to validation after shuffling the data
 
 ### Model hyperparameters
