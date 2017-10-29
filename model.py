@@ -1,3 +1,6 @@
+import csv
+import matplotlib.image as mpimg
+import numpy as np
 import tensorflow as tf
 import keras
 from keras.models import Sequential
@@ -6,13 +9,90 @@ from keras.layers import Conv2D, MaxPooling2D, Merge, Lambda, Cropping2D
 from keras.utils import np_utils
 from keras.regularizers import l2
 from keras.callbacks import ModelCheckpoint
-from training_data_loader import *
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
 
 flags.DEFINE_integer('epochs', 25, "The number of epochs.")
 flags.DEFINE_integer('batch_size', 128, "The batch size.")
+flags.DEFINE_string('road', 'hard', "Specify the simulator road")
+
+training_file_config = {
+  'easy': [
+    {
+      'log_file': 'data/driving_log.csv',
+      'image_fold': 'data/IMG/'
+    }
+  ],
+  'hard': [
+    {
+      'log_file': 'data_tough_roads/driving_log.csv',
+      'image_fold': 'data_tough_roads/IMG/'
+    },
+    {
+      'log_file': 'data_hard_additional/driving_log.csv',
+      'image_fold': 'data_hard_additional/IMG/'
+    },
+    {
+      'log_file': 'data_hard_additional_2/driving_log.csv',
+      'image_fold': 'data_hard_additional_2/IMG/'
+    }
+  ]
+}
+
+def load_data():
+  file_configs = training_file_config[FLAGS.road]
+  records = []
+
+  for config in file_configs:
+    driving_log_file = config['log_file']
+    image_fold = config['image_fold']
+    reader = csv.reader(open(driving_log_file))
+    for row in reader:
+      r = {
+        'center' : image_fold + row[0].split('/')[-1],
+        'left'   : image_fold + row[1].split('/')[-1],
+        'right'  : image_fold + row[2].split('/')[-1],
+        'steering' : float(row[3]),
+        'throttle' : float(row[4]),
+        'brake'    : float(row[5]),
+        'speed'    : float(row[6])
+      }
+      records.append(r)
+
+  X = []
+  y = []
+  for record in records:
+    center_img_file_name = record['center']
+    left_img_file_name   = record['left']
+    right_img_file_name  = record['right']
+    steering = record['steering']
+    throttle = record['throttle']
+    brake    = record['brake']
+    speed    = record['speed']
+
+    img = mpimg.imread(center_img_file_name)
+    X.append(img)
+    y.append(steering)
+    X.append(np.fliplr(img)) # flip the image for extra training data
+    y.append(-steering)
+
+    img = mpimg.imread(left_img_file_name)
+    left_steering = steering + 0.25
+    X.append(img)
+    y.append(left_steering)
+    X.append(np.fliplr(img)) # flip the image for extra training data
+    y.append(-left_steering)
+
+    img = mpimg.imread(right_img_file_name)
+    right_steering = steering - 0.25
+    X.append(img)
+    y.append(right_steering)
+    X.append(np.fliplr(img)) # flip the image for extra training data
+    y.append(-right_steering)
+
+  return np.array(X), np.array(y)
+
 
 model_file = 'model.h5'
 
