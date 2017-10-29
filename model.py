@@ -17,7 +17,7 @@ flags.DEFINE_integer('epochs', 25, "The number of epochs.")
 flags.DEFINE_integer('batch_size', 128, "The batch size.")
 flags.DEFINE_string('road', 'hard', "Specify the simulator road")
 
-training_file_config = {
+TRAINING_FILE_CONFIG = {
   'easy': [
     {
       'log_file': 'data/driving_log.csv',
@@ -40,8 +40,11 @@ training_file_config = {
   ]
 }
 
+MODEL_FILE = 'model.h5'
+INPUT_SHAPE = (160,320,3)
+
 def load_data():
-  file_configs = training_file_config[FLAGS.road]
+  file_configs = TRAINING_FILE_CONFIG[FLAGS.road]
   records = []
 
   for config in file_configs:
@@ -90,41 +93,44 @@ def load_data():
     y.append(right_steering)
     X.append(np.fliplr(img)) # flip the image for extra training data
     y.append(-right_steering)
-
   return np.array(X), np.array(y)
 
 
-model_file = 'model.h5'
+def build_model():
+  model = Sequential()
+  model.add(Lambda(lambda x: (x / 128.0) - 1.0, input_shape=INPUT_SHAPE))
+  model.add(Cropping2D(cropping=((50,20), (0,0))))
+  model.add(Conv2D(24, (5, 5), activation='elu', strides=(2,2), kernel_regularizer = l2(0.001)))
+  model.add(Conv2D(36, (5, 5), activation='elu', strides=(2,2), kernel_regularizer = l2(0.001)))
+  model.add(Conv2D(48, (5, 5), activation='elu', strides=(2,2), kernel_regularizer = l2(0.001)))
+  model.add(Conv2D(64, (3, 3), activation='elu', kernel_regularizer = l2(0.001)))
+  model.add(Conv2D(64, (3, 3), activation='elu', kernel_regularizer = l2(0.001)))
+  model.add(Flatten())
+  model.add(Dropout(0.5))
+  model.add(Dense(100, activation='elu', kernel_regularizer = l2(0.001)))
+  model.add(Dropout(0.5))
+  model.add(Dense(50, activation='elu', kernel_regularizer = l2(0.001)))
+  model.add(Dense(10, activation='elu', kernel_regularizer = l2(0.001)))
+  model.add(Dense(1))
+  model.summary()
+  return model
 
-model = Sequential()
-model.add(Lambda(lambda x: (x / 128.0) - 1.0, input_shape=(160,320,3)))
-model.add(Cropping2D(cropping=((50,20), (0,0))))
-model.add(Conv2D(24, (5, 5), activation='elu', strides=(2,2), kernel_regularizer = l2(0.001)))
-model.add(Conv2D(36, (5, 5), activation='elu', strides=(2,2), kernel_regularizer = l2(0.001)))
-model.add(Conv2D(48, (5, 5), activation='elu', strides=(2,2), kernel_regularizer = l2(0.001)))
-model.add(Conv2D(64, (3, 3), activation='elu', kernel_regularizer = l2(0.001)))
-model.add(Conv2D(64, (3, 3), activation='elu', kernel_regularizer = l2(0.001)))
-model.add(Flatten())
-model.add(Dropout(0.5))
-model.add(Dense(100, activation='elu', kernel_regularizer = l2(0.001)))
-model.add(Dropout(0.5))
-model.add(Dense(50, activation='elu', kernel_regularizer = l2(0.001)))
-model.add(Dense(10, activation='elu', kernel_regularizer = l2(0.001)))
-model.add(Dense(1))
-model.summary()
 
-checkpoint = ModelCheckpoint('model-{epoch:03d}.h5', monitor='val_loss', verbose=0, save_best_only=True, mode='auto')
-model.compile(loss='mean_squared_error', optimizer='adam')
+def main():
+  model = build_model()
+  checkpoint = ModelCheckpoint('model-{epoch:03d}.h5', monitor='val_loss', verbose=0, save_best_only=True, mode='auto')
+  model.compile(loss='mean_squared_error', optimizer='adam')
 
-X_train, y_train = load_data()
-print(len(X_train))
-print(y_train)
+  X_train, y_train = load_data()
 
-model.fit(X_train, y_train,
-          epochs=FLAGS.epochs, batch_size=FLAGS.batch_size, validation_split=0.2, shuffle=True,
-          callbacks=[checkpoint])
+  model.fit(X_train, y_train,
+            epochs=FLAGS.epochs,
+            batch_size=FLAGS.batch_size,
+            validation_split=0.2,
+            shuffle=True,
+            callbacks=[checkpoint])
+  model.save(MODEL_FILE)
 
-model.save(model_file)
 
-l = model.predict(X_train, batch_size=100)
-print(l)
+if __name__ == '__main__':
+  main()
