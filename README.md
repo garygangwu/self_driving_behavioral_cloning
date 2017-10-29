@@ -70,7 +70,7 @@ The first simulator road is smooth with few sharp turn, and so I only need to dr
 <img src="images/multi_roads_2.jpg">
 <img src="images/multi_roads_3.jpg">
 
-These roads seems to be close to each other in the images, and the training model can easily assume that they are connected, even though sharp turn signs are in sight. In order to make the model recoganize these patterns, I had to drive these sections mulitple times to  ensure the deep neural network to recoganize and hopefully memorize these patterns.
+These roads seems to be close to each other on the images, but not connected. However, the training model might assume that they were connected and tried to drive over there, although the sharp turn signs were in sight. In order to make the model to handle these difficult situations, I had to drive these areas mulitple times to ensure the deep neural network to memorize the patterns.
 
 ## Evaluation
 
