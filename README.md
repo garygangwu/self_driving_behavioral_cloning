@@ -72,6 +72,14 @@ The first simulator road is smooth with few sharp turn, and so I only need to dr
 
 These roads seems to be close to each other on the images, but not connected. However, the training model might assume that they were connected and tried to drive over there, although the sharp turn signs were in sight. In order to make the model to handle these difficult situations, I had to drive these areas mulitple times to ensure the deep neural network to memorize the patterns.
 
-## Evaluation
+## Evaluation and Discussion
+
+### Can the model trained on road A directly drive successfully on road B?
+
+If the road A and B's conditions are very similar, it is totally possible the model can be directly applied to the other road. Here is the youtube video demostrating that the model that I trained in the easy road drove car in an unseen mountain road successfully.
+
+
+However 
+
 
 
