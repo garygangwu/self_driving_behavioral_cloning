@@ -68,7 +68,8 @@ def load_input():
       records.append(r)
   return records
 
-def image_augmentation(img_file_name, steering):
+
+def load_and_flip_image(img_file_name, steering):
   X = []
   y = []
   img = mpimg.imread(img_file_name)
@@ -77,6 +78,7 @@ def image_augmentation(img_file_name, steering):
   X.append(np.fliplr(img)) # flip the image for extra training data
   y.append(-steering)
   return X, y
+
 
 # Generator for batch process
 def batch_generator(input_records):
@@ -90,9 +92,9 @@ def batch_generator(input_records):
       right_img_file_name  = record['right']
       steering = record['steering']
 
-      center_X, center_y = image_augmentation(center_img_file_name, steering)
-      left_X, left_y = image_augmentation(left_img_file_name, steering + STEERING_ADJUSTMENT)
-      right_X, right_y = image_augmentation(right_img_file_name, steering - STEERING_ADJUSTMENT)
+      center_X, center_y = load_and_flip_image(center_img_file_name, steering)
+      left_X, left_y = load_and_flip_image(left_img_file_name, steering + STEERING_ADJUSTMENT)
+      right_X, right_y = load_and_flip_image(right_img_file_name, steering - STEERING_ADJUSTMENT)
       X += center_X + left_X + right_X
       y += center_y + left_y + right_y
 
@@ -100,59 +102,6 @@ def batch_generator(input_records):
         yield (np.array(X), np.array(y))
         X = []
         y = []
-
-
-# def load_data():
-#   file_configs = TRAINING_FILE_CONFIG[FLAGS.road]
-#   records = []
-
-#   for config in file_configs:
-#     driving_log_file = config['log_file']
-#     image_fold = config['image_fold']
-#     reader = csv.reader(open(driving_log_file))
-#     for row in reader:
-#       r = {
-#         'center' : image_fold + row[0].split('/')[-1],
-#         'left'   : image_fold + row[1].split('/')[-1],
-#         'right'  : image_fold + row[2].split('/')[-1],
-#         'steering' : float(row[3]),
-#         'throttle' : float(row[4]),
-#         'brake'    : float(row[5]),
-#         'speed'    : float(row[6])
-#       }
-#       records.append(r)
-
-#   X = []
-#   y = []
-#   for record in records:
-#     center_img_file_name = record['center']
-#     left_img_file_name   = record['left']
-#     right_img_file_name  = record['right']
-#     steering = record['steering']
-#     throttle = record['throttle']
-#     brake    = record['brake']
-#     speed    = record['speed']
-
-#     img = mpimg.imread(center_img_file_name)
-#     X.append(img)
-#     y.append(steering)
-#     X.append(np.fliplr(img)) # flip the image for extra training data
-#     y.append(-steering)
-
-#     img = mpimg.imread(left_img_file_name)
-#     left_steering = steering + 0.25
-#     X.append(img)
-#     y.append(left_steering)
-#     X.append(np.fliplr(img)) # flip the image for extra training data
-#     y.append(-left_steering)
-
-#     img = mpimg.imread(right_img_file_name)
-#     right_steering = steering - 0.25
-#     X.append(img)
-#     y.append(right_steering)
-#     X.append(np.fliplr(img)) # flip the image for extra training data
-#     y.append(-right_steering)
-#   return np.array(X), np.array(y)
 
 
 # Build model based on nvidia's architecture from its white paper
@@ -180,15 +129,6 @@ def main():
   model = build_model()
   checkpoint = ModelCheckpoint('model-{epoch:03d}.h5', monitor='val_loss', verbose=0, save_best_only=True, mode='auto')
   model.compile(loss='mean_squared_error', optimizer='adam')
-
-  #X_train, y_train = load_data()
-
-  # model.fit(X_train, y_train,
-  #           epochs=FLAGS.epochs,
-  #           batch_size=FLAGS.batch_size,
-  #           validation_split=0.2,
-  #           shuffle=True,
-  #           callbacks=[checkpoint])
 
   train_data, valid_data = train_test_split(load_input(), test_size=0.2)
 
