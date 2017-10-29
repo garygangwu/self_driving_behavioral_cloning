@@ -42,7 +42,7 @@ TRAINING_FILE_CONFIG = {
   ]
 }
 
-MODEL_FILE = 'model.h5'
+MODEL_FILE = 'model.new.h5'
 INPUT_SHAPE = (160,320,3)
 STEERING_ADJUSTMENT = 0.25
 
