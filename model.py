@@ -138,6 +138,7 @@ def main():
 
   model.fit_generator(batch_generator(train_data),
                       steps_per_epoch,
+                      epochs=FLAGS.epochs,
                       validation_data = batch_generator(valid_data),
                       validation_steps = validation_steps,
                       callbacks=[checkpoint])
