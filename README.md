@@ -122,9 +122,9 @@ If the road A and B's conditions are similar, it is totally possible the model c
 |---|
 |[Drive on an unseen road - Youtube](https://youtu.be/Qb-Ik6BNcWE)|
 
-However, the model trained on the easy road cannot directly be used in the hard road, and visa versa. The road conditions (e.g. curves, cliff signs) are very different. Therefore, in this project, the model in each road is trained independently with their own road images and steering records. Ideally, I should consider transfer learning because both roads could share convonlutional neural network features on road lines and shapes.
+However, the model trained on the easy road cannot directly be used in the hard road, and visa versa. The road conditions (e.g. curves, cliff signs, river) are very different. Therefore, in this project, the model in each road is trained independently with their own road images and steering records. Ideally, I should consider transfer learning because both roads could share convonlutional neural network features on road lines and shapes.
 
 |<img src="images/easy_track.png">|<img src="images/hard_track.png">|
-|---|---|
+|:---:|:---:|
 |Easy Road|Hard Road|
 
