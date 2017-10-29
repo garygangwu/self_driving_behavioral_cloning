@@ -43,7 +43,7 @@ From bottom up, below is each layer's funcationalities
 
 | Layer | Type | Description |
 | :---: | :---: | --- |
-| Input |  | 1) 160x320 images <br> 2) Normalize the pixel value to [-1, 1] range <br> 3) Chop the top and bottom portion of the images to remove noices |
+| Input |  | 1) 160x320x3 images <br> 2) Normalize the pixel value to [-1, 1] range <br> 3) Chop the top and bottom portion of the images to remove noices |
 | Layer 1 | Conv2D | 24 filters with 5x5 convolution window and 2x2 strides |
 | Layer 2 | Conv2D | 36 filters with 5x5 convolution window and 2x2 strides |
 | Layer 3 | Conv2D | 48 filters with 5x5 convolution window and 2x2 strides |
