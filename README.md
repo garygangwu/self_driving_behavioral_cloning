@@ -62,12 +62,15 @@ Data augementation can be acheived through flipping images and taking the opposi
 
 To prevent overfitting, both dropout and L2 regulaization are used. 50% dropout has applied to the first two fully connected layers, while the L2 regulaization has appiled to conv2D and fully connected layers.
 
-### Extra road training
+### Extra road driving for better training.
 
 The first simulator road is smooth with few sharp turn, and so I only need to drive the car for a couple cycle to complete the training. The result works pretty well. However, the second simulator road is a lot harder, not only with sharp turns, but also multiple roads in the same images and thus making the model confused on which one is the right path.
 
+<img src="images/multi_roads_1.jpg">
+<img src="images/multi_roads_2.jpg">
+<img src="images/multi_roads_3.jpg">
 
-
+These roads seems to be close to each other in the images, and the training model can easily assume that they are connected, even though sharp turn signs are in sight. In order to make the model recoganize these patterns, I had to drive these sections mulitple times to  ensure the deep neural network to recoganize and hopefully memorize these patterns.
 
 ## Evaluation
 
