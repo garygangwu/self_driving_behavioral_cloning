@@ -25,7 +25,7 @@ The train data is collected by driving the car in the simulator. Each car equipe
 <img src="images/left_2.jpg" width="200"><img src="images/center_2.jpg" width="200"><img src="images/right_2.jpg" width="200">
 
 ## Network Architecture
-I used Nvidia's architecture from their white paper [End to End Learning for Self-Driving Cars](https://arxiv.org/pdf/1604.07316.pdf). It contains 9 layers, 1 normalization layer, 5 convolutional layers, and 3 fully connected layers. 
+I used Nvidia's architecture from their white paper [End to End Learning for Self-Driving Cars](https://arxiv.org/pdf/1604.07316.pdf). It contains 9 layers, 5 convolutional layers and 4 fully connected layers. 
 
 From bottom up, below is each layer's funcationalities
 
