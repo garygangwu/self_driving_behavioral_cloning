@@ -6,7 +6,7 @@ Here are two youtube videos that the self-driving cars ran under two anmiated ro
 
 | <a href="http://www.youtube.com/watch?feature=player_embedded&v=L6MeuvmfgOM" target="_blank"><img src="http://img.youtube.com/vi/L6MeuvmfgOM/0.jpg" alt="Road Track One" width="240" height="180" border="10" /></a> | <a href="http://www.youtube.com/watch?feature=player_embedded&v=MueOlce4iXw" target="_blank"><img src="http://img.youtube.com/vi/MueOlce4iXw/0.jpg" alt="Road Track One" width="240" height="180" border="10" /></a> |
 |---|---|
-|[Road Track one - Youtube](https://youtu.be/L6MeuvmfgOM)|[Road Track two (hard one) - Youtube](https://youtu.be/MueOlce4iXw) |
+|[Road Track one (easy one) - Youtube](https://youtu.be/L6MeuvmfgOM)|[Road Track two (hard one) - Youtube](https://youtu.be/MueOlce4iXw) |
 
 ## Simulator Download
 * [Linux](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae46bb_linux-sim/linux-sim.zip)
