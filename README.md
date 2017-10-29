@@ -60,6 +60,7 @@ For each road in the simulator, I driven the cars for two cycles to collect the 
 
 * Optimized on mean squared error as a standard unbiased estimate of error variance for this regression problem
 * Adam optimizer is used, because it is [suggested as the default optimization method for deep learning applications](http://cs231n.github.io/neural-networks-3/)
+* Activation function: ELU is used because it facilitates [a fast and accurate Deep Network Learning](https://arxiv.org/abs/1511.07289)
 
 ### Leverage left and right camera images
 
@@ -67,7 +68,7 @@ he left and right images are important to teach the network how to recover from 
 
 ### Data Augmentation through fliping images
 
-Data augementation can be acheived through flipping images and taking the opposite sign of the steering measurement. This only only introduces more training data, but also minimizes the left turn bias because in the simulator the steering left dominates in the road condition
+Data augementation can be acheived through flipping images and taking the opposite sign of the steering measurement. This only only introduces more training data, but also alleviates the left turn bias because in the simulator the steering left dominates in the road condition
 
 ### Training data size
 
